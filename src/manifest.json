@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Go To Site",
+  "version": "1.0.0",
+  "description": "Enables typing 'go yt <query>' in the Chrome search bar to search YouTube directly.",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "omnibox": {
+    "keyword": "go"
+  },
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://gemini.google.com/*",
+        "*://chatgpt.com/*",
+        "*://claude.ai/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Manage GoTo Shortcuts"
+  }
+}

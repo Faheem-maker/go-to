@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GoTo Shortcuts Manager</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo-area">
+        <svg class="logo-icon" viewBox="0 0 24 24" width="24" height="24">
+          <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+        </svg>
+        <h1>GoTo <span>Shortcuts</span></h1>
+      </div>
+      <p class="subtitle">Quick address bar commands manager</p>
+    </header>
+
+    <main>
+      <!-- Add/Edit Shortcut Form -->
+      <section class="card form-card">
+        <h2>Add New Shortcut</h2>
+        <form id="shortcut-form">
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="keyword">Keyword</label>
+              <input type="text" id="keyword" placeholder="e.g. yt" required autocomplete="off" pattern="^[a-zA-Z0-9_\-]+$">
+              <span class="help-text">Alphanumeric keyword (lowercase suggested)</span>
+            </div>
+            
+            <div class="form-group flex-2">
+              <label for="display-name">Display Name</label>
+              <input type="text" id="display-name" placeholder="e.g. YouTube" required autocomplete="off">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Shortcut Type</label>
+            <div class="type-selector">
+              <label class="type-option active">
+                <input type="radio" name="shortcut-type" value="url" checked>
+                <span>Custom URL</span>
+              </label>
+              <label class="type-option">
+                <input type="radio" name="shortcut-type" value="tool">
+                <span>Tool Bank</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- URL Inputs (Visible when Custom URL is selected) -->
+          <div id="url-fields" class="form-fields-group">
+            <div class="form-group">
+              <label for="search-url">Search URL Pattern</label>
+              <input type="url" id="search-url" placeholder="https://www.youtube.com/results?search_query={query}" required>
+              <span class="help-text">Must include <code>{query}</code> where the search term will go</span>
+            </div>
+            
+            <div class="form-group">
+              <label for="default-url">Default URL <span class="optional-label">(Optional)</span></label>
+              <input type="url" id="default-url" placeholder="https://www.youtube.com/">
+              <span class="help-text">Loaded when keyword is run without any search terms</span>
+            </div>
+          </div>
+
+          <!-- Tool Inputs (Visible when Tool Bank is selected, hidden by default) -->
+          <div id="tool-fields" class="form-fields-group hidden">
+            <div class="form-group">
+              <label for="tool-select">Select Tool</label>
+              <div class="select-wrapper">
+                <select id="tool-select">
+                  <option value="compare_llm">Compare LLMs (llm-stats.com)</option>
+                </select>
+              </div>
+              <span class="help-text">Triggers special custom interactive controller scripts</span>
+            </div>
+          </div>
+
+          <button type="submit" id="submit-btn" class="btn btn-primary">Add Shortcut</button>
+        </form>
+      </section>
+
+      <!-- Active Shortcuts List -->
+      <section class="card list-card">
+        <div class="list-header">
+          <h2>Active Shortcuts</h2>
+          <span class="badge" id="shortcut-count">0</span>
+        </div>
+        
+        <div class="shortcuts-list" id="shortcuts-list">
+          <div class="empty-state">
+            <p>No shortcuts configured yet.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <button id="reset-defaults" class="btn btn-outline btn-sm">Reset to Defaults</button>
+      <div class="usage-instructions">
+        <span>Usage: Type <code>go &lt;keyword&gt; &lt;query&gt;</code> in Chrome's URL bar</span>
+      </div>
+    </footer>
+  </div>
+  <script src="defaults.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
