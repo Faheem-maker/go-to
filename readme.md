@@ -2,7 +2,7 @@
 
 > Launch websites, AI assistants, and your favorite workflows directly from your browser's search bar.
 
-![Banner Screenshot Placeholder]
+<img src="assets/banner.png" alt="" width="100%">
 
 **Go** is a tiny productivity extension built around one simple idea:
 
@@ -165,7 +165,7 @@ Coming soon.
 
 ➡️ **Chrome Web Store**
 
-https://your-extension-link-here
+I'm trying to publish this extension to web store. Stay tuned for updates!
 
 ---
 
